@@ -25,27 +25,38 @@ function renderizarLivros(filtro = "") {
         li.className = livro.testamento === "VT" ? "item-vt" : "item-nt";
         li.onclick = () => {
             document.getElementById('titulo-livro').innerText = `Estudo de ${livro.nome}`;
-            document.getElementById('video-player').src = `https://www.youtube.com/embed/${livro.id}?rel=0`;
+            
+            // CORREÇÃO PARA GITHUB PAGES:
+            const host = window.location.protocol + "//" + window.location.host;
+            const embedUrl = `https://www.youtube.com/embed/${livro.id}?enablejsapi=1&origin=${encodeURIComponent(host)}&rel=0`;
+            
+            document.getElementById('video-player').src = embedUrl;
         };
         listaUl.appendChild(li);
     });
 }
 
 function filtrarLivros() {
-    const termo = document.getElementById('busca').value;
-    renderizarLivros(termo);
+    renderizarLivros(document.getElementById('busca').value);
 }
 
 function abrirDicionario() {
     const termo = prompt("O que deseja buscar no dicionário?");
-    if(termo) window.open(`https://www.bibliaonline.com.br/dicionario-biblico/${termo}`, '_blank');
+    if(termo) {
+        // Site estável para dicionário
+        window.open(`https://www.bibliaonline.com.br/dicionario-biblico/${termo}`, '_blank');
+    }
 }
 
 function abrirChave() {
-    const livro = document.getElementById('titulo-livro').innerText.replace('Estudo de ', '');
-    if(livro !== "Selecione um livro") {
+    const titulo = document.getElementById('titulo-livro').innerText;
+    if(titulo !== "Selecione um livro") {
+        const livro = titulo.replace('Estudo de ', '');
         window.open(`https://www.biblegateway.com/quicksearch/?search=${livro}&version=NVI-PT`, '_blank');
-    } else { alert("Selecione um livro primeiro!"); }
+    } else {
+        alert("Selecione um livro no menu lateral primeiro!");
+    }
 }
 
+// Inicializa a lista
 renderizarLivros();
