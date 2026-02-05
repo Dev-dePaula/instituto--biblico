@@ -83,8 +83,17 @@ function renderizarLivros(filtro = "") {
         let li = document.createElement('li');
         li.innerText = livro.nome;
         li.className = livro.testamento === "VT" ? "item-vt" : "item-nt";
-        li.onclick = () => {
-            document.getElementById('titulo-livro').innerText = `Estudo de ${livro.nome}`;
+       li.onclick = () => {
+    document.getElementById('titulo-livro').innerText = `Estudo de ${livro.nome}`;
+    
+    // Captura o domínio atual (ex: https://seu-usuario.github.io)
+    const currentOrigin = window.location.origin;
+    
+    // Monta a URL com os parâmetros que o YouTube exige para sites externos
+    const embedUrl = `https://www.youtube.com/embed/${livro.id}?enablejsapi=1&origin=${encodeURIComponent(currentOrigin)}&rel=0`;
+    
+    document.getElementById('video-player').src = embedUrl;
+};
             
             // LINK SIMPLIFICADO PARA EVITAR BLOQUEIO NO GITHUB
             const embedUrl = `https://www.youtube.com/embed/${livro.id}`;
@@ -114,3 +123,4 @@ function abrirChave() {
 }
 
 renderizarLivros();
+
