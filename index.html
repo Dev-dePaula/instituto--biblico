@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Na Sala do Pai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Na Sala do Pai</h2>
+                <p>Estudo Bíblico Visual</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="busca" placeholder="Filtrar livro..." onkeyup="filtrarLivros()">
+            </div>
+            <ul id="lista-livros"></ul>
+        </nav>
+
+        <main class="content">
+            <header>
+                <h1 id="titulo-livro">Selecione um livro</h1>
+                <div class="acoes">
+                    <button onclick="abrirDicionario()" class="btn-tool">📖 Dicionário</button>
+                    <button onclick="abrirChave()" class="btn-tool">🔍 Chave Bíblica</button>
+                </div>
+            </header>
+            
+            <div class="video-wrapper">
+                <iframe id="video-player" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
